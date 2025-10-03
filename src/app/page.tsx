@@ -72,6 +72,7 @@ const buttonStyles = `
     83% { filter: hue-rotate(300deg) saturate(1.4) brightness(0.95); }
     100% { filter: hue-rotate(360deg) saturate(1.1) brightness(1); }
   }
+  
 `
 
 export default function HomePage() {
@@ -134,6 +135,102 @@ export default function HomePage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: buttonStyles }} />
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        * {
+          outline: none;
+        }
+        
+        *:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          border-radius: 4px;
+        }
+        
+        button, .bento-card, [role='button'], [tabindex] {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+        
+        p, h1, h2, h3, h4, h5, h6, span, div {
+          -webkit-tap-highlight-color: transparent;
+        }
+        
+        button:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px rgba(156, 77, 255, 0.2);
+        }
+        
+        .bento-card:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px rgba(156, 77, 255, 0.2);
+        }
+        
+        *:focus:not(:focus-visible) {
+          outline: none;
+        }
+        
+        ::selection {
+          background: rgba(156, 77, 255, 0.2);
+          color: inherit;
+        }
+        
+        ::-moz-selection {
+          background: rgba(156, 77, 255, 0.2);
+          color: inherit;
+        }
+        
+        .bento-card {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .bento-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 1px;
+          background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+              rgba(156, 77, 255, calc(var(--glow-intensity) * 0.8)) 0%,
+              rgba(77, 156, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+              transparent 60%);
+          border-radius: inherit;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: subtract;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+          z-index: 1;
+          opacity: 0;
+        }
+        
+        .bento-card:hover::after {
+          opacity: 1;
+        }
+        
+        .bento-card:hover {
+          box-shadow: 0 4px 20px rgba(46, 24, 78, 0.4), 0 0 30px rgba(156, 77, 255, 0.2);
+          transform: translateY(-2px);
+        }
+        
+        @media (max-width: 1024px) {
+          .bento-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        
+        @media (max-width: 600px) {
+          .bento-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        `
+      }} />
     <div style={{minHeight: '100vh', backgroundColor: '#0a0a0a', color: '#ffffff', fontFamily: 'Inter, system-ui, sans-serif'}}>
       {/* Clean Navigation */}
       <nav style={{position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid #1a1a1a'}}>
@@ -723,7 +820,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite'
               }}>
                 <Database size={64} color="#ffffff" />
@@ -759,7 +856,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite 0.5s'
               }}>
                 <Brain size={64} color="#ffffff" />
@@ -795,7 +892,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite 1.5s'
               }}>
                 <AlertTriangle size={64} color="#ffffff" />
@@ -847,7 +944,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Bento Features Section */}
       <section style={{padding: '6rem 0', backgroundColor: '#111111'}}>
         <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
           <div style={{textAlign: 'center', marginBottom: '4rem'}}>
@@ -859,155 +956,377 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
+          {/* Bento Grid */}
+          <div className="bento-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '1.25rem',
+            maxWidth: '64rem',
+            margin: '0 auto',
+            fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)'
+          }}>
+            {/* Card 1 - Equipment Health */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <TrendingUp size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Monitoring</span>
+                <TrendingUp size={20} color="#9c4dff" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Equipment Health Monitoring
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Real-time monitoring of excavators, haul trucks, and processing equipment with 95%+ accuracy in failure prediction.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Equipment Health
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Monitor excavators, haul trucks & crushers
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#9c4dff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>95%+ Uptime</span>
+                </div>
+              </div>
             </div>
-            
+
+            {/* Card 2 - Cost Optimization */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <BarChart3 size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Optimization</span>
+                <BarChart3 size={20} color="#4d9cff" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Cost Optimization
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Reduce maintenance costs by 30% and prevent unplanned downtime that costs mining operations millions annually.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Cost Reduction
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Optimize fuel, maintenance & downtime costs
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#4d9cff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>30% Cost Savings</span>
+                </div>
+              </div>
             </div>
-            
+
+            {/* Card 3 - AI-Powered Predictive Analytics (Large) */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 2',
+                gridRow: 'span 2',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Shield size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>AI Analytics</span>
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Safety & Compliance
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Improve safety outcomes and ensure compliance with mining regulations through proactive equipment monitoring.
-              </p>
+              
+              {/* Central Visual - AI Brain with Data Flow */}
+              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', position: 'relative'}}>
+                <div style={{position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  {/* Main Brain Icon */}
+                  <Brain size={80} color="#9c4dff" style={{filter: 'drop-shadow(0 0 20px rgba(156, 77, 255, 0.5))'}} />
+                  
+                  {/* Floating Data Points */}
+                  <div style={{position: 'absolute', top: '-20px', left: '-30px', width: '8px', height: '8px', backgroundColor: '#4d9cff', borderRadius: '50%', animation: 'pulse 2s infinite'}}></div>
+                  <div style={{position: 'absolute', top: '20px', right: '-40px', width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite 0.5s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-10px', left: '20px', width: '10px', height: '10px', backgroundColor: '#9c4dff', borderRadius: '50%', animation: 'pulse 2s infinite 1s'}}></div>
+                  
+                  {/* Connection Lines */}
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '2px', height: '40px', backgroundColor: 'rgba(156, 77, 255, 0.3)', transform: 'translate(-50%, -50%) rotate(45deg)', transformOrigin: 'center'}}></div>
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '2px', height: '30px', backgroundColor: 'rgba(77, 156, 255, 0.3)', transform: 'translate(-50%, -50%) rotate(-45deg)', transformOrigin: 'center'}}></div>
+                </div>
+              </div>
+              
+              <div style={{textAlign: 'center'}}>
+                <h3 style={{color: '#ffffff', fontSize: '1.25rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Predictive Analytics
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.9rem', lineHeight: '1.4', opacity: '0.8', margin: '0'}}>
+                  AI-powered failure prediction for mining equipment
+                </p>
+              </div>
             </div>
-            
+
+            {/* Card 4 - Safety & Compliance (Large) */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 2',
+                gridRow: 'span 2',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Brain size={24} color="#ffffff" />
-          </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Predictive Analytics
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Advanced machine learning models predict equipment failures 2-4 weeks in advance, enabling proactive maintenance scheduling.
-              </p>
-        </div>
-            
-            <div 
-              style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Truck size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Safety</span>
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Fleet Management
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Optimize your entire mining fleet with real-time tracking, performance analytics, and automated maintenance workflows.
-            </p>
-          </div>
-          
+              
+              {/* Central Visual - Shield with Safety Elements */}
+              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', position: 'relative'}}>
+                <div style={{position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  {/* Main Shield Icon */}
+                  <Shield size={80} color="#4d9cff" style={{filter: 'drop-shadow(0 0 20px rgba(77, 156, 255, 0.5))'}} />
+                  
+                  {/* Safety Indicators */}
+                  <div style={{position: 'absolute', top: '-25px', left: '-20px', width: '12px', height: '12px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite'}}></div>
+                  <div style={{position: 'absolute', top: '-15px', right: '-25px', width: '8px', height: '8px', backgroundColor: '#9c4dff', borderRadius: '50%', animation: 'pulse 2s infinite 0.7s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-20px', left: '-15px', width: '10px', height: '10px', backgroundColor: '#4d9cff', borderRadius: '50%', animation: 'pulse 2s infinite 1.4s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-10px', right: '-20px', width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite 0.3s'}}></div>
+                  
+                  {/* Protection Ring */}
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '100px', height: '100px', border: '2px solid rgba(77, 156, 255, 0.3)', borderRadius: '50%', transform: 'translate(-50%, -50%)', animation: 'pulse 3s infinite'}}></div>
+                </div>
+              </div>
+              
+              <div style={{textAlign: 'center'}}>
+                <h3 style={{color: '#ffffff', fontSize: '1.25rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Safety & Compliance
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.9rem', lineHeight: '1.4', opacity: '0.8', margin: '0'}}>
+                  Comprehensive safety monitoring for mining operations
+                </p>
+              </div>
+            </div>
+
+            {/* Card 5 - Fleet Management */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <CheckCircle size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Fleet</span>
+                <Truck size={20} color="#ff4d9c" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Data Integration
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Seamlessly integrate with existing mining systems, sensors, and databases for comprehensive operational insights.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Fleet Management
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Track haul trucks, loaders & excavators
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>GPS Tracking</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 6 - Data Integration */}
+            <div 
+              className="bento-card"
+              style={{
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
+              }}
+            >
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Integration</span>
+                <CheckCircle size={20} color="#9c4dff" />
+              </div>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Data Integration
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Connect sensors, SCADA & ERP systems
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#9c4dff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>API Integration</span>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -1017,9 +1336,9 @@ export default function HomePage() {
               style={{
                 background: 'rgba(26, 26, 26, 0.8)',
                 color: '#ffffff',
-                border: '2px solid #ffffff',
-                padding: '1.25rem 2.5rem',
-                fontSize: '1.125rem',
+                border: 'none',
+                padding: '2.25rem 4.5rem',
+                fontSize: '1.625rem',
                 fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
@@ -1028,7 +1347,7 @@ export default function HomePage() {
                 gap: '0.75rem',
                 margin: '0 auto',
                 borderRadius: '0.5rem',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 77, 255, 0.2)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
                 backdropFilter: 'blur(10px)',
                 position: 'relative',
                 overflow: 'hidden'
@@ -1036,17 +1355,15 @@ export default function HomePage() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)'
                 e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(156, 77, 255, 0.3)'
-                e.currentTarget.style.border = '2px solid #4d9cff'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 77, 255, 0.2)'
-                e.currentTarget.style.border = '2px solid #9c4dff'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)'
               }}
               onClick={() => window.location.href = '/contact'}
             >
-              Get Started
-              <ArrowRight size={20} />
+              <span style={{color: '#ffffff'}}>Get Started</span>
+              <ArrowRight size={32} style={{color: '#ffffff'}} />
             </button>
           </div>
           
