@@ -1,9 +1,8 @@
 import './globals.css'
-import { Analytics } from '@vercel/analytics/react'
 
 export const metadata = {
-  title: 'Elysium',
-  description: 'Predictive Maintenance for Mining Operations',
+  title: 'Mining AI Solutions',
+  description: 'Advanced AI solutions for mining operations and equipment monitoring',
 }
 
 export default function RootLayout({
@@ -15,7 +14,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black text-white">
         {children}
-        <Analytics />
       </body>
     </html>
   )
