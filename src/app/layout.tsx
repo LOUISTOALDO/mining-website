@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Mining AI Solutions',
+  title: 'Elysium',
   description: 'Advanced AI solutions for mining operations and equipment monitoring',
 }
 
