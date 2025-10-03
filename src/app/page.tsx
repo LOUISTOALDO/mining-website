@@ -3,7 +3,7 @@
 import { ArrowRight, Menu, X, CheckCircle, Star, Users, Zap, Database, Brain, AlertTriangle, TrendingUp, Shield, BarChart3, Truck } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import Orb from '../components/Orb'
+import Orb from '@/components/Orb'
 
 // Add CSS animations for the button and random brain effects
 const buttonStyles = `
