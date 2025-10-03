@@ -18,10 +18,6 @@ const nextConfig = {
   },
   // Output configuration for Vercel
   output: 'standalone',
-  // Experimental features
-  experimental: {
-    optimizeCss: true,
-  },
 }
 
 module.exports = nextConfig
