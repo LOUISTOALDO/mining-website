@@ -72,6 +72,7 @@ const buttonStyles = `
     83% { filter: hue-rotate(300deg) saturate(1.4) brightness(0.95); }
     100% { filter: hue-rotate(360deg) saturate(1.1) brightness(1); }
   }
+  
 `
 
 export default function HomePage() {
@@ -134,6 +135,342 @@ export default function HomePage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: buttonStyles }} />
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        * {
+          outline: none;
+        }
+        
+        *:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          border-radius: 4px;
+        }
+        
+        button, .bento-card, [role='button'], [tabindex] {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+        
+        p, h1, h2, h3, h4, h5, h6, span, div {
+          -webkit-tap-highlight-color: transparent;
+        }
+        
+        button:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px rgba(156, 77, 255, 0.2);
+        }
+        
+        .bento-card:focus-visible {
+          outline: 2px solid #9c4dff;
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px rgba(156, 77, 255, 0.2);
+        }
+        
+        *:focus:not(:focus-visible) {
+          outline: none;
+        }
+        
+        ::selection {
+          background: rgba(156, 77, 255, 0.2);
+          color: inherit;
+        }
+        
+        ::-moz-selection {
+          background: rgba(156, 77, 255, 0.2);
+          color: inherit;
+        }
+        
+        .bento-card {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .bento-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 1px;
+          background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+              rgba(156, 77, 255, calc(var(--glow-intensity) * 0.8)) 0%,
+              rgba(77, 156, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+              transparent 60%);
+          border-radius: inherit;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: subtract;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+          z-index: 1;
+          opacity: 0;
+        }
+        
+        .bento-card:hover::after {
+          opacity: 1;
+        }
+        
+        .bento-card:hover {
+          box-shadow: 0 4px 20px rgba(46, 24, 78, 0.4), 0 0 30px rgba(156, 77, 255, 0.2);
+          transform: translateY(-2px);
+        }
+        
+        /* Mobile-First Responsive Design */
+        
+        /* Base mobile styles (up to 768px) */
+        @media (max-width: 768px) {
+          /* Global mobile fixes */
+          * {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          
+          /* Navigation */
+          .mobile-nav {
+            display: block !important;
+          }
+          
+          .desktop-nav {
+            display: none !important;
+          }
+          
+          /* Hero Section */
+          .hero-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 2rem !important;
+            text-align: center !important;
+            padding: 1rem !important;
+          }
+          
+          .hero-title {
+            font-size: 2.2rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 1rem !important;
+          }
+          
+          .hero-subtitle {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          .hero-orb {
+            order: 2 !important;
+            transform: none !important;
+            margin: 0 auto !important;
+            width: 280px !important;
+            height: 280px !important;
+            padding: 0 !important;
+          }
+          
+          /* Sections */
+          .section-padding {
+            padding: 3rem 1rem !important;
+          }
+          
+          .section-title {
+            font-size: 2rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 1rem !important;
+          }
+          
+          .section-subtitle {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 2rem !important;
+          }
+          
+          /* Process Flow */
+          .process-flow {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 2rem !important;
+            padding: 2rem 0 !important;
+            position: relative !important;
+          }
+          
+          .process-step {
+            position: relative !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            margin: 0 auto 2rem auto !important;
+            width: 100% !important;
+            max-width: 280px !important;
+          }
+          
+          .process-arrow {
+            display: none !important;
+          }
+          
+          /* Bento Grid - Mobile Redesigned */
+          .bento-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+            padding: 0 0.5rem !important;
+            max-width: 100% !important;
+            width: 100% !important;
+          }
+          
+          .bento-card {
+            width: 100% !important;
+            min-height: 180px !important;
+            max-height: none !important;
+            height: auto !important;
+            padding: 1.25rem !important;
+            margin: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            box-sizing: border-box !important;
+            border-radius: 12px !important;
+          }
+          
+          /* Remove all grid constraints on mobile */
+          .bento-card[style*="grid-column: span 2"],
+          .bento-card[style*="grid-row: span 2"] {
+            grid-column: unset !important;
+            grid-row: unset !important;
+            min-height: 180px !important;
+            width: 100% !important;
+          }
+          
+          /* Mobile bento card content optimization */
+          .bento-card h3 {
+            font-size: 1.2rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.75rem !important;
+            font-weight: 600 !important;
+          }
+          
+          .bento-card p {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 0 !important;
+            flex-grow: 1 !important;
+          }
+          
+          .bento-card svg {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+          }
+          
+          /* Ensure proper spacing in bento cards */
+          .bento-card > div {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          
+          /* Neural Network Section - Mobile Optimized */
+          .neural-network {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 0 !important;
+            height: auto !important;
+            margin: 2rem 0 !important;
+          }
+          
+          .neural-network > div {
+            width: 300px !important;
+            height: 300px !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+          }
+          
+          /* Make neural network nodes more visible on mobile */
+          .neural-network div[style*="position: absolute"] {
+            width: 12px !important;
+            height: 12px !important;
+          }
+          
+          /* Optimize neural network lines for mobile */
+          .neural-network svg line {
+            stroke-width: 3px !important;
+          }
+          
+          /* Footer */
+          .footer-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 2rem !important;
+          }
+          
+          .footer-column {
+            width: 100% !important;
+            margin: 0 !important;
+          }
+        }
+        
+        /* Tablet styles (769px to 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 3rem !important;
+          }
+          
+          .bento-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 1.5rem !important;
+          }
+          
+          .process-flow {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            height: 400px !important;
+          }
+          
+          .process-step {
+            position: relative !important;
+            transform: none !important;
+            margin: 0 !important;
+          }
+          
+          .process-arrow {
+            display: block !important;
+            transform: none !important;
+          }
+        }
+        
+        /* Desktop styles (1025px and up) */
+        @media (min-width: 1025px) {
+          .hero-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 4rem !important;
+          }
+          
+          .bento-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 1.25rem !important;
+          }
+          
+          .process-flow {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            height: 500px !important;
+          }
+          
+          .process-step {
+            position: absolute !important;
+          }
+          
+          .neural-network {
+            display: block !important;
+          }
+        }
+        `
+      }} />
     <div style={{minHeight: '100vh', backgroundColor: '#0a0a0a', color: '#ffffff', fontFamily: 'Inter, system-ui, sans-serif'}}>
       {/* Clean Navigation */}
       <nav style={{position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid #1a1a1a'}}>
@@ -154,15 +491,15 @@ export default function HomePage() {
               </span>
             </Link>
             
-            {/* Navigation Links */}
-            <div style={{display: 'flex', alignItems: 'center', gap: '2rem'}}>
+            {/* Desktop Navigation Links */}
+            <div style={{display: 'flex', alignItems: 'center', gap: '2rem'}} className="desktop-nav">
               <Link href="/products" style={{color: '#e5e7eb', fontSize: '0.9rem', fontWeight: '500', textDecoration: 'none', transition: 'color 0.2s'}}>Products</Link>
               <Link href="/solutions" style={{color: '#e5e7eb', fontSize: '0.9rem', fontWeight: '500', textDecoration: 'none', transition: 'color 0.2s'}}>Solutions</Link>
               <Link href="/enterprise" style={{color: '#e5e7eb', fontSize: '0.9rem', fontWeight: '500', textDecoration: 'none', transition: 'color 0.2s'}}>Enterprise</Link>
             </div>
             
-            {/* CTA Buttons */}
-            <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+            {/* Desktop CTA Buttons */}
+            <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}} className="desktop-nav">
               <Link href="/contact" style={{
                 backgroundColor: '#1a1a1a',
                 color: '#ffffff',
@@ -190,18 +527,87 @@ export default function HomePage() {
                 Sign In
               </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '2.5rem',
+                height: '2.5rem',
+                backgroundColor: 'transparent',
+                border: 'none',
+                color: '#ffffff',
+                cursor: 'pointer'
+              }}
+              className="mobile-nav"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              backgroundColor: 'rgba(10, 10, 10, 0.98)',
+              backdropFilter: 'blur(10px)',
+              borderBottom: '1px solid #1a1a1a',
+              padding: '1rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem'
+            }} className="mobile-nav">
+              <Link href="/products" style={{color: '#e5e7eb', fontSize: '1rem', fontWeight: '500', textDecoration: 'none', padding: '0.5rem 0'}}>Products</Link>
+              <Link href="/solutions" style={{color: '#e5e7eb', fontSize: '1rem', fontWeight: '500', textDecoration: 'none', padding: '0.5rem 0'}}>Solutions</Link>
+              <Link href="/enterprise" style={{color: '#e5e7eb', fontSize: '1rem', fontWeight: '500', textDecoration: 'none', padding: '0.5rem 0'}}>Enterprise</Link>
+              <div style={{borderTop: '1px solid #2a2a2a', paddingTop: '1rem', marginTop: '0.5rem'}}>
+                <Link href="/contact" style={{
+                  backgroundColor: '#1a1a1a',
+                  color: '#ffffff',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  border: '1px solid #374151',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '0.9rem',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                  textDecoration: 'none',
+                  marginBottom: '0.5rem'
+                }}>
+                  Get Started
+                  <ArrowRight size={16} className="ml-2" />
+                </Link>
+                <a 
+                  href="https://mining-ai-platform-dashboard.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{color: '#e5e7eb', fontSize: '0.9rem', fontWeight: '500', textDecoration: 'none', display: 'block', padding: '0.5rem 0'}}
+                >
+                  Sign In
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section style={{padding: '6rem 0', minHeight: '80vh', display: 'flex', alignItems: 'center'}}>
-        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', width: '100%'}}>
-          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center'}}>
+      <section style={{padding: '6rem 0', minHeight: '80vh', display: 'flex', alignItems: 'center'}} className="section-padding">
+        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', width: '100%'}}>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center'}} className="hero-grid">
             
             {/* Left Content */}
             <div>
-              <h1 style={{fontSize: '3.5rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-0.02em'}}>
+              <h1 style={{fontSize: '3.5rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-0.02em'}} className="hero-title">
                 <span style={{display: 'block'}}>
                   <span style={{
                     background: 'linear-gradient(135deg, #9c4dff 0%, #4d9cff 50%, #ff4d9c 100%)',
@@ -214,7 +620,7 @@ export default function HomePage() {
                 </span>
               </h1>
               
-              <p style={{fontSize: '1.25rem', color: '#d1d5db', lineHeight: '1.6', marginBottom: '2rem', fontWeight: '400'}}>
+              <p style={{fontSize: '1.25rem', color: '#d1d5db', lineHeight: '1.6', marginBottom: '2rem', fontWeight: '400'}} className="hero-subtitle">
                 Transform raw data into actionable intelligence with AI-powered insights for mining operations.
               </p>
               
@@ -264,8 +670,8 @@ export default function HomePage() {
             </div>
 
             {/* Right Content - Orb */}
-            <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '550px', transform: 'translateX(125px)'}}>
-              <div style={{width: '550px', height: '550px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '550px', transform: 'translateX(125px)'}} className="hero-orb">
+              <div style={{width: '550px', height: '550px', display: 'flex', alignItems: 'center', justifyContent: 'center', maxWidth: '100%', maxHeight: '100%'}}>
                 <Orb 
                   hue={0}
                   hoverIntensity={0.3}
@@ -282,8 +688,8 @@ export default function HomePage() {
         padding: '8rem 0',
         backgroundColor: '#000000',
         position: 'relative'
-      }}>
-        <div style={{maxWidth: '1400px', margin: '0 auto', padding: '0 2rem'}}>
+      }} className="section-padding">
+        <div style={{maxWidth: '1400px', margin: '0 auto', padding: '0 1rem'}}>
           {/* Centered Header */}
           <div style={{textAlign: 'center', marginBottom: '4rem'}}>
             <div style={{
@@ -304,7 +710,7 @@ export default function HomePage() {
               marginBottom: '1.5rem',
               letterSpacing: '-0.02em',
               lineHeight: '1.1'
-            }}>
+            }} className="section-title">
               Full-Stack AI Solutions
             </h2>
             
@@ -314,7 +720,7 @@ export default function HomePage() {
               lineHeight: '1.6',
               maxWidth: '600px',
               margin: '0 auto 2rem auto'
-            }}>
+            }} className="section-subtitle">
               Outcomes delivered with world-class data, models, agents, and deployment.
             </p>
             
@@ -348,7 +754,7 @@ export default function HomePage() {
             </button>
           </div>
           
-          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center'}}>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center'}} className="hero-grid">
             
             {/* Left Content */}
             <div>
@@ -415,8 +821,8 @@ export default function HomePage() {
             </div>
 
               {/* Right Content - Neural Network */}
-              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start', height: '500px', paddingLeft: '200px', paddingTop: '30px'}}>
-                <div style={{position: 'relative', width: '550px', height: '550px', backgroundColor: '#000000'}}>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start', height: '500px', paddingLeft: '200px', paddingTop: '30px'}} className="neural-network">
+                <div style={{position: 'relative', width: '550px', height: '550px', backgroundColor: '#000000', maxWidth: '100%', maxHeight: '100%'}}>
                   {/* Neural Network Nodes */}
                   {/* Input Layer - 5 dots */}
                   <div style={{position: 'absolute', top: '15%', left: '5%', width: '20px', height: '20px', backgroundColor: '#ffffff', borderRadius: '50%', transform: 'translate(-50%, -50%)', zIndex: 10}} />
@@ -685,8 +1091,8 @@ export default function HomePage() {
       </section>
 
       {/* How it Works Section - Simple Flow */}
-      <section style={{padding: '8rem 0', backgroundColor: '#000000'}}>
-        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
+      <section style={{padding: '8rem 0', backgroundColor: '#000000'}} className="section-padding">
+        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 1rem'}}>
           <div style={{textAlign: 'center', marginBottom: '6rem'}}>
             <h2 style={{
               fontSize: '2.5rem',
@@ -694,7 +1100,7 @@ export default function HomePage() {
               marginBottom: '1.5rem',
               color: '#ffffff',
               letterSpacing: '-0.02em'
-            }}>
+            }} className="section-title">
               How it works
             </h2>
             <p style={{
@@ -703,16 +1109,16 @@ export default function HomePage() {
               maxWidth: '600px',
               margin: '0 auto',
               lineHeight: '1.6'
-            }}>
+            }} className="section-subtitle">
               Simple, powerful AI-driven process from data to action
             </p>
           </div>
           
           {/* Visual Process Flow */}
-          <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '500px', width: '100%'}}>
+          <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '500px', width: '100%'}} className="process-flow">
             
             {/* Step 1: Data Collection */}
-            <div style={{position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}} className="process-step">
                   <div style={{
                 width: '160px',
                 height: '160px',
@@ -723,7 +1129,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite'
               }}>
                 <Database size={64} color="#ffffff" />
@@ -737,7 +1143,7 @@ export default function HomePage() {
             </div>
 
             {/* Arrow 1 */}
-            <div style={{position: 'absolute', left: '30%', top: '50%', transform: 'translateY(-50%)'}}>
+            <div style={{position: 'absolute', left: '30%', top: '50%', transform: 'translateY(-50%)'}} className="process-arrow">
               <ArrowRight 
                 size={40} 
                 style={{
@@ -748,7 +1154,7 @@ export default function HomePage() {
             </div>
 
             {/* Step 2: AI Analysis */}
-            <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}} className="process-step">
               <div style={{
                 width: '160px',
                 height: '160px',
@@ -759,7 +1165,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite 0.5s'
               }}>
                 <Brain size={64} color="#ffffff" />
@@ -773,7 +1179,7 @@ export default function HomePage() {
                 </div>
                 
             {/* Arrow 2 */}
-            <div style={{position: 'absolute', left: '70%', top: '50%', transform: 'translateY(-50%)'}}>
+            <div style={{position: 'absolute', left: '70%', top: '50%', transform: 'translateY(-50%)'}} className="process-arrow">
                   <ArrowRight 
                 size={40} 
                     style={{
@@ -784,7 +1190,7 @@ export default function HomePage() {
               </div>
 
             {/* Step 3: Smart Alerts */}
-            <div style={{position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}} className="process-step">
               <div style={{
                 width: '160px',
                 height: '160px',
@@ -795,7 +1201,7 @@ export default function HomePage() {
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 border: '2px solid #ffffff',
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
+                boxShadow: '0 0 15px rgba(156, 77, 255, 0.2), 0 0 30px rgba(77, 156, 255, 0.1), 0 0 45px rgba(255, 77, 156, 0.05)',
                 animation: 'pulse 2s ease-in-out infinite 1.5s'
               }}>
                 <AlertTriangle size={64} color="#ffffff" />
@@ -847,167 +1253,389 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section style={{padding: '6rem 0', backgroundColor: '#111111'}}>
-        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
+      {/* Bento Features Section */}
+      <section style={{padding: '6rem 0', backgroundColor: '#111111'}} className="section-padding">
+        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 1rem'}}>
           <div style={{textAlign: 'center', marginBottom: '4rem'}}>
-            <h2 style={{fontSize: '2.5rem', fontWeight: '700', color: '#ffffff', marginBottom: '1rem'}}>
+            <h2 style={{fontSize: '2.5rem', fontWeight: '700', color: '#ffffff', marginBottom: '1rem'}} className="section-title">
               Built for Mining Operations
             </h2>
-            <p style={{fontSize: '1.125rem', color: '#9ca3af', maxWidth: '600px', margin: '0 auto'}}>
+            <p style={{fontSize: '1.125rem', color: '#9ca3af', maxWidth: '600px', margin: '0 auto'}} className="section-subtitle">
               Specialized AI solutions designed specifically for mining equipment and operations
             </p>
           </div>
           
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem'}}>
+          {/* Bento Grid */}
+          <div className="bento-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '1.25rem',
+            maxWidth: '64rem',
+            margin: '0 auto',
+            fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)'
+          }}>
+            {/* Card 1 - Equipment Health */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <TrendingUp size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Monitoring</span>
+                <TrendingUp size={20} color="#9c4dff" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Equipment Health Monitoring
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Real-time monitoring of excavators, haul trucks, and processing equipment with 95%+ accuracy in failure prediction.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Equipment Health
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Monitor excavators, haul trucks & crushers
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#9c4dff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>95%+ Uptime</span>
+                </div>
+              </div>
             </div>
-            
+
+            {/* Card 2 - Cost Optimization */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <BarChart3 size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Optimization</span>
+                <BarChart3 size={20} color="#4d9cff" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Cost Optimization
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Reduce maintenance costs by 30% and prevent unplanned downtime that costs mining operations millions annually.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Cost Reduction
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Optimize fuel, maintenance & downtime costs
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#4d9cff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>30% Cost Savings</span>
+                </div>
+              </div>
             </div>
-            
+
+            {/* Card 3 - AI-Powered Predictive Analytics (Large) */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 2',
+                gridRow: 'span 2',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Shield size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>AI Analytics</span>
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Safety & Compliance
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Improve safety outcomes and ensure compliance with mining regulations through proactive equipment monitoring.
-              </p>
+              
+              {/* Central Visual - AI Brain with Data Flow */}
+              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', position: 'relative'}}>
+                <div style={{position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  {/* Main Brain Icon */}
+                  <Brain size={80} color="#9c4dff" style={{filter: 'drop-shadow(0 0 20px rgba(156, 77, 255, 0.5))'}} />
+                  
+                  {/* Floating Data Points */}
+                  <div style={{position: 'absolute', top: '-20px', left: '-30px', width: '8px', height: '8px', backgroundColor: '#4d9cff', borderRadius: '50%', animation: 'pulse 2s infinite'}}></div>
+                  <div style={{position: 'absolute', top: '20px', right: '-40px', width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite 0.5s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-10px', left: '20px', width: '10px', height: '10px', backgroundColor: '#9c4dff', borderRadius: '50%', animation: 'pulse 2s infinite 1s'}}></div>
+                  
+                  {/* Connection Lines */}
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '2px', height: '40px', backgroundColor: 'rgba(156, 77, 255, 0.3)', transform: 'translate(-50%, -50%) rotate(45deg)', transformOrigin: 'center'}}></div>
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '2px', height: '30px', backgroundColor: 'rgba(77, 156, 255, 0.3)', transform: 'translate(-50%, -50%) rotate(-45deg)', transformOrigin: 'center'}}></div>
+                </div>
+              </div>
+              
+              <div style={{textAlign: 'center'}}>
+                <h3 style={{color: '#ffffff', fontSize: '1.25rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Predictive Analytics
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.9rem', lineHeight: '1.4', opacity: '0.8', margin: '0'}}>
+                  AI-powered failure prediction for mining equipment
+                </p>
+              </div>
             </div>
-            
+
+            {/* Card 4 - Safety & Compliance (Large) */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 2',
+                gridRow: 'span 2',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Brain size={24} color="#ffffff" />
-          </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Predictive Analytics
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Advanced machine learning models predict equipment failures 2-4 weeks in advance, enabling proactive maintenance scheduling.
-              </p>
-        </div>
-            
-            <div 
-              style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <Truck size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Safety</span>
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Fleet Management
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Optimize your entire mining fleet with real-time tracking, performance analytics, and automated maintenance workflows.
-            </p>
-          </div>
-          
+              
+              {/* Central Visual - Shield with Safety Elements */}
+              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '1', position: 'relative'}}>
+                <div style={{position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  {/* Main Shield Icon */}
+                  <Shield size={80} color="#4d9cff" style={{filter: 'drop-shadow(0 0 20px rgba(77, 156, 255, 0.5))'}} />
+                  
+                  {/* Safety Indicators */}
+                  <div style={{position: 'absolute', top: '-25px', left: '-20px', width: '12px', height: '12px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite'}}></div>
+                  <div style={{position: 'absolute', top: '-15px', right: '-25px', width: '8px', height: '8px', backgroundColor: '#9c4dff', borderRadius: '50%', animation: 'pulse 2s infinite 0.7s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-20px', left: '-15px', width: '10px', height: '10px', backgroundColor: '#4d9cff', borderRadius: '50%', animation: 'pulse 2s infinite 1.4s'}}></div>
+                  <div style={{position: 'absolute', bottom: '-10px', right: '-20px', width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%', animation: 'pulse 2s infinite 0.3s'}}></div>
+                  
+                  {/* Protection Ring */}
+                  <div style={{position: 'absolute', top: '50%', left: '50%', width: '100px', height: '100px', border: '2px solid rgba(77, 156, 255, 0.3)', borderRadius: '50%', transform: 'translate(-50%, -50%)', animation: 'pulse 3s infinite'}}></div>
+                </div>
+              </div>
+              
+              <div style={{textAlign: 'center'}}>
+                <h3 style={{color: '#ffffff', fontSize: '1.25rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Safety & Compliance
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.9rem', lineHeight: '1.4', opacity: '0.8', margin: '0'}}>
+                  Comprehensive safety monitoring for mining operations
+                </p>
+              </div>
+            </div>
+
+            {/* Card 5 - Fleet Management */}
             <div 
+              className="bento-card"
               style={{
-                backgroundColor: 'rgba(26, 26, 26, 0.6)', 
-                padding: '2rem', 
-                borderRadius: '1.5rem', 
-                border: '2px solid #ffffff', 
-                backdropFilter: 'blur(10px)', 
-                boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
               }}
             >
-              <div style={{width: '3rem', height: '3rem', background: '#000000', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '2px solid #ffffff', boxShadow: '0 0 20px rgba(156, 77, 255, 0.3), 0 0 40px rgba(77, 156, 255, 0.15)', transition: 'all 0.3s ease'}}>
-                <CheckCircle size={24} color="#ffffff" />
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Fleet</span>
+                <Truck size={20} color="#ff4d9c" />
               </div>
-              <h3 style={{fontSize: '1.25rem', fontWeight: '600', color: '#ffffff', marginBottom: '1rem'}}>
-                Data Integration
-              </h3>
-              <p style={{color: '#d1d5db', lineHeight: '1.6'}}>
-                Seamlessly integrate with existing mining systems, sensors, and databases for comprehensive operational insights.
-              </p>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Fleet Management
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Track haul trucks, loaders & excavators
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#ff4d9c', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>GPS Tracking</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 6 - Data Integration */}
+            <div 
+              className="bento-card"
+              style={{
+                gridColumn: 'span 1',
+                gridRow: 'span 1',
+                backgroundColor: '#060010',
+                border: '1px solid #392e4e',
+                borderRadius: '20px',
+                padding: '1.25rem',
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '--glow-x': '50%',
+                '--glow-y': '50%',
+                '--glow-intensity': '0',
+                '--glow-radius': '200px'
+              } as React.CSSProperties}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const relativeX = (x / rect.width) * 100;
+                const relativeY = (y / rect.height) * 100;
+                
+                e.currentTarget.style.setProperty('--glow-x', `${relativeX}%`);
+                e.currentTarget.style.setProperty('--glow-y', `${relativeY}%`);
+                e.currentTarget.style.setProperty('--glow-intensity', '1');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.setProperty('--glow-intensity', '0');
+              }}
+            >
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem'}}>
+                <span style={{color: '#ffffff', fontSize: '1rem', fontWeight: '500'}}>Integration</span>
+                <CheckCircle size={20} color="#9c4dff" />
+              </div>
+              <div>
+                <h3 style={{color: '#ffffff', fontSize: '1rem', fontWeight: '400', margin: '0 0 0.5rem 0'}}>
+                  Data Integration
+                </h3>
+                <p style={{color: '#ffffff', fontSize: '0.75rem', lineHeight: '1.25', opacity: '0.9', margin: '0 0 0.75rem 0'}}>
+                  Connect sensors, SCADA & ERP systems
+                </p>
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem'}}>
+                  <div style={{width: '6px', height: '6px', backgroundColor: '#9c4dff', borderRadius: '50%'}}></div>
+                  <span style={{color: '#ffffff', fontSize: '0.7rem', opacity: '0.7'}}>API Integration</span>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -1017,9 +1645,9 @@ export default function HomePage() {
               style={{
                 background: 'rgba(26, 26, 26, 0.8)',
                 color: '#ffffff',
-                border: '2px solid #ffffff',
-                padding: '1.25rem 2.5rem',
-                fontSize: '1.125rem',
+                border: 'none',
+                padding: '2.25rem 4.5rem',
+                fontSize: '1.625rem',
                 fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
@@ -1028,7 +1656,7 @@ export default function HomePage() {
                 gap: '0.75rem',
                 margin: '0 auto',
                 borderRadius: '0.5rem',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 77, 255, 0.2)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
                 backdropFilter: 'blur(10px)',
                 position: 'relative',
                 overflow: 'hidden'
@@ -1036,17 +1664,15 @@ export default function HomePage() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)'
                 e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(156, 77, 255, 0.3)'
-                e.currentTarget.style.border = '2px solid #4d9cff'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 77, 255, 0.2)'
-                e.currentTarget.style.border = '2px solid #9c4dff'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)'
               }}
               onClick={() => window.location.href = '/contact'}
             >
-              Get Started
-              <ArrowRight size={20} />
+              <span style={{color: '#ffffff'}}>Get Started</span>
+              <ArrowRight size={32} style={{color: '#ffffff'}} />
             </button>
           </div>
           
@@ -1055,9 +1681,9 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer style={{backgroundColor: '#111111', padding: '3rem 0', borderTop: '1px solid #2a2a2a'}}>
-        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
-          <div style={{display: 'flex', justifyContent: 'flex-start', marginBottom: '2rem'}}>
-            <div style={{marginRight: '6rem'}}>
+        <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 1rem'}}>
+          <div style={{display: 'flex', justifyContent: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '2rem'}} className="footer-grid">
+            <div style={{marginRight: '6rem', minWidth: '200px'}} className="footer-column">
               <h4 style={{fontSize: '0.875rem', fontWeight: '700', color: '#ffffff', marginBottom: '1rem', letterSpacing: '0.05em'}}>COMPANY</h4>
               <ul style={{listStyle: 'none', padding: 0}}>
                 <li style={{marginBottom: '0.75rem'}}><Link href="/about" style={{color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem'}}>About</Link></li>
@@ -1065,7 +1691,7 @@ export default function HomePage() {
                 <li style={{marginBottom: '0.75rem'}}><Link href="/privacy" style={{color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem'}}>Privacy</Link></li>
               </ul>
             </div>
-            <div style={{marginRight: '6rem'}}>
+            <div style={{marginRight: '6rem', minWidth: '200px'}} className="footer-column">
               <h4 style={{fontSize: '0.875rem', fontWeight: '700', color: '#ffffff', marginBottom: '1rem', letterSpacing: '0.05em'}}>GUIDES</h4>
               <ul style={{listStyle: 'none', padding: 0}}>
                 <li style={{marginBottom: '0.75rem'}}><Link href="/predictive-maintenance" style={{color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem'}}>Predictive Maintenance</Link></li>
@@ -1077,7 +1703,7 @@ export default function HomePage() {
                 <li style={{marginBottom: '0.75rem'}}><Link href="/safety-analytics" style={{color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem'}}>Safety Analytics</Link></li>
               </ul>
             </div>
-            <div>
+            <div style={{minWidth: '200px'}} className="footer-column">
               <h4 style={{fontSize: '0.875rem', fontWeight: '700', color: '#ffffff', marginBottom: '1rem', letterSpacing: '0.05em'}}>RESOURCES</h4>
               <ul style={{listStyle: 'none', padding: 0}}>
                 <li style={{marginBottom: '0.75rem'}}><Link href="/contact" style={{color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem'}}>Contact Us</Link></li>
